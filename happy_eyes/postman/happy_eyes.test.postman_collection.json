@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "09f6f992-168a-4aed-89a2-a1cf6b00166d",
+		"name": "happy_eyes.test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{api_url}}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api_url}}",
+					"host": [
+						"{{api_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{api_url}}/user/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"PPE\",\n    \"email\":\"admin11111111112@ppe.edu.vn\",\n    \"password\": \"123456\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/user/register",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{api_url}}/user/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"admin1111@ppe.edu.vn\",\n    \"password\": \"123456\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/user/login",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{api_url}}/user/me",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/user/me",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"user",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{api_url}}/posts",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"PPE's Post\",\n    \"description\": \"The best education program on the world!\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/posts",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
