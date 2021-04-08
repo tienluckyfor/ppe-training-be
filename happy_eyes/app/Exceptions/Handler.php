@@ -35,6 +35,8 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
+            \Illuminate\Support\Facades\Log::channel('single')->info('$e', [$e]);
+
             //
         });
     }
