@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -17,6 +17,10 @@ class PostController extends Controller
     public function index()
     {
         //
+        $posts = Post::where('user_id', Auth::id())
+            ->orderBy('id', 'desc')
+            ->get();
+        return response()->json(['status' => true, 'data' => $posts]);
     }
 
     /**
@@ -56,6 +60,9 @@ class PostController extends Controller
     public function show($id)
     {
         //
+        $post = Post::where('id', $id)
+            ->first();
+        return response()->json(['status' => true, 'data' => $post]);
     }
 
     /**
@@ -79,6 +86,15 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $payloads = $request->except(['_method']);
+        if (Post::where('id', $id)->update($payloads)) {
+            return response()->json([
+                'status' => true,
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+        ]);
     }
 
     /**
@@ -90,5 +106,13 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        if(Post::where('id', $id)->delete()){
+            return response()->json([
+                'status' => true,
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+        ]);
     }
 }
