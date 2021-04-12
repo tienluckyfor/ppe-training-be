@@ -1,13 +1,11 @@
 <?php
 $redirect_url = URL::to('/api/auth-handle');
 $redirect_url = str_replace('http:', 'https:', $redirect_url);
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use GuzzleHttp\Client;
-use \App\Models\User ;
-use App\Http\Controllers\Api\UserController;
+
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +25,17 @@ Route::prefix('user')->group(function () {
 });
 
 Route::middleware('auth:api')->resource('posts', PostController::class);
+Route::get('all-posts', function () {
+    $users = \App\Models\User::get();
+    $posts = \App\Models\Post::get();
+    return response()->json([
+        'status' => true,
+        'data'   => [
+            'posts' => $posts,
+            'users' => $users,
+        ]
+    ]);
+});
 
 Route::get('/auth-handle', [AuthController::class, 'authHandle']);
 Route::get('/auth-generate-url', [AuthController::class, 'generateUrl']);
