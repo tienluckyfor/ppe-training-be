@@ -114,6 +114,8 @@ class AuthController extends Controller
                 $newUser
             );
             $userCreate->token = $userCreate->createToken('authToken')->accessToken;
+            return redirect(config('app.frontend_url').'/Auth?token='.$userCreate->token);
+
             return response()->json([
                 'status' => true,
                 'data'   => $userCreate
@@ -163,6 +165,7 @@ class AuthController extends Controller
                 $newUser
             );
             $userCreate->token = $userCreate->createToken('authToken')->accessToken;
+            return redirect(config('app.frontend_url').'/Auth?token='.$userCreate->token);
             return response()->json([
                 'status' => true,
                 'data'   => $userCreate
